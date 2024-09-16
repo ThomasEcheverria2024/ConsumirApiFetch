@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="mostrar">Muestra Informacion de la Api Random</button>
+    <div id="contenido"></div>
+
+        <script>
+            document.getElementById("mostrar").addEventListener("click", mostrarDatosAPI, true);
+            let contenido = document.querySelector("#contenido");
+            function mostrarDatosAPI() {
+                fetch("https://api.randomuser.me/")
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data.results[0]);
+                    contenido.innerHTML = `
+                    <img src="${data.results[0].picture.large}" alt="Foto de Usuario">
+                    <p>Nombre: ${data.results[0].name.first} ${data.results[0].name.last}</p>
+                    <p>Email: ${data.results[0].email}</p>
+                    <p>Edad: ${data.results[0].dob.age}</p>
+                    `;
+            
+            })
+        }
+        </script>
+</body>
+
+</html>
+
